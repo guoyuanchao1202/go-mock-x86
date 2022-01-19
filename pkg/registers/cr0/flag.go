@@ -1,6 +1,9 @@
 package cr0
 
-import "go-mock-x86/pkg/registers/core"
+import (
+	"go-mock-x86/pkg/core"
+	core2 "go-mock-x86/pkg/registers/internal/core"
+)
 
 const (
 	PEFlag = "PE"
@@ -32,18 +35,18 @@ var (
 
 var flagMap map[string]core.IFlag
 
-func init() {
-	PE = core.NewRegisterFlag(PEFlag, 0, 1)
-	MP = core.NewRegisterFlag(MPFlag, 1, 2)
-	EM = core.NewRegisterFlag(EMFlag, 2, 3)
-	TS = core.NewRegisterFlag(TSFlag, 3, 4)
-	ET = core.NewRegisterFlag(ETFlag, 4, 5)
-	NE = core.NewRegisterFlag(NEFlag, 5, 6)
-	WP = core.NewRegisterFlag(WPFlag, 16, 17)
-	AM = core.NewRegisterFlag(AMFlag, 18, 19)
-	NW = core.NewRegisterFlag(NWFlag, 29, 30)
-	CD = core.NewRegisterFlag(CDFlag, 30, 31)
-	PG = core.NewRegisterFlag(PGFlag, 31, 32)
+func initFlag() {
+	PE = core2.NewRegisterFlag(PEFlag, 0, 1)
+	MP = core2.NewRegisterFlag(MPFlag, 1, 2)
+	EM = core2.NewRegisterFlag(EMFlag, 2, 3)
+	TS = core2.NewRegisterFlag(TSFlag, 3, 4)
+	ET = core2.NewRegisterFlag(ETFlag, 4, 5)
+	NE = core2.NewRegisterFlag(NEFlag, 5, 6)
+	WP = core2.NewRegisterFlag(WPFlag, 16, 17)
+	AM = core2.NewRegisterFlag(AMFlag, 18, 19)
+	NW = core2.NewRegisterFlag(NWFlag, 29, 30)
+	CD = core2.NewRegisterFlag(CDFlag, 30, 31)
+	PG = core2.NewRegisterFlag(PGFlag, 31, 32)
 
 	flagMap = make(map[string]core.IFlag)
 	flagMap[PEFlag] = PE
