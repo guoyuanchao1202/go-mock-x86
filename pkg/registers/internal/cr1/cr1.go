@@ -8,7 +8,7 @@ import (
 type cr1 struct {
 	value       uint64
 	reservedBit uint64
-	flagMap     map[string]core.IFlag
+	fieldMap     map[string]core.IField
 }
 
 var cr1_ *cr1
@@ -22,14 +22,14 @@ func init() {
 	cr1_ = &cr1{}
 }
 
-func (cr1 *cr1) Set(flag core.IFlag) error {
+func (cr1 *cr1) Set(Field core.IField) error {
 	return fmt.Errorf("reserved register, not support set operation")
 }
 
-func (cr1 *cr1) Clr(flagName string) error {
+func (cr1 *cr1) Clr(FieldName string) error {
 	return fmt.Errorf("reserved register, not support clr operation")
 }
 
-func (cr1 *cr1) Get(flagName string) (uint64, error) {
+func (cr1 *cr1) Get(FieldName string) (uint64, error) {
 	return 0, fmt.Errorf("reserved register, not support get operation")
 }

@@ -12,7 +12,7 @@ import (
 	"go-mock-x86/pkg/registers/internal/eflags"
 )
 
-type registerProcessFunc func(register core.IRegister, flag core.IFlag) error
+type registerProcessFunc func(register core.IRegister, flag core.IField) error
 
 type RegisterManager struct {
 	registers                 map[consts.RegisterName]core.IRegister
@@ -57,15 +57,15 @@ func init() {
 	}
 }
 
-func (rm *RegisterManager) Set(registerName consts.RegisterName, flag core.IFlag) error {
+func (rm *RegisterManager) Set(registerName consts.RegisterName, flag core.IField) error {
 	return rm.do(registerName, flag, rm.registerSetProcessFuncMap)
 }
 
-func (rm *RegisterManager) Clr(registerName consts.RegisterName, flag core.IFlag) error {
+func (rm *RegisterManager) Clr(registerName consts.RegisterName, flag core.IField) error {
 	return rm.do(registerName, flag, rm.registerClrProcessFuncMap)
 }
 
-func (rm *RegisterManager) do(registerName consts.RegisterName, flag core.IFlag, processFuncMap map[consts.RegisterName]registerProcessFunc) error {
+func (rm *RegisterManager) do(registerName consts.RegisterName, flag core.IField, processFuncMap map[consts.RegisterName]registerProcessFunc) error {
 	register, ok := rm.registers[registerName]
 	if !ok {
 		return fmt.Errorf("invalid opeation: unsupport registerManager: %s", registerName)

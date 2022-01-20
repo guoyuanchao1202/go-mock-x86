@@ -3,29 +3,29 @@ package cr3
 import (
 	"fmt"
 	"go-mock-x86/pkg/core"
-	"go-mock-x86/pkg/registers/flags/cr3flags"
+	"go-mock-x86/pkg/registers/flieds/cr3fields"
 )
 
 type cr3 struct {
 	value       uint64
 	reservedBit uint64
 	maskBit     uint64
-	flagMap     map[string]core.IFlag
+	fieldsMap     map[string]core.IField
 }
 
 var cr3_ *cr3
 
 func init() {
-	flagMap := make(map[string]core.IFlag)
-	flagMap[cr3flags.PCDFlag] = cr3flags.PCD
-	flagMap[cr3flags.PWTFlag] = cr3flags.PWT
-	flagMap[cr3flags.PDEPAFlag] = cr3flags.PDEPA
-	flagMap[cr3flags.PDPTEPAFlag] = cr3flags.PDPTEPA
-	flagMap[cr3flags.PML4EPAFlag] = cr3flags.PML4EPA
-	flagMap[cr3flags.PML5EPAFlag] = cr3flags.PML5EPA
-	flagMap[cr3flags.PCIDFlag] = cr3flags.PCID
+	fieldsMap := make(map[string]core.IField)
+	fieldsMap[cr3fields.PCDField] = cr3fields.PCD
+	fieldsMap[cr3fields.PWTField] = cr3fields.PWT
+	fieldsMap[cr3fields.PDEPAField] = cr3fields.PDEPA
+	fieldsMap[cr3fields.PDPTEPAField] = cr3fields.PDPTEPA
+	fieldsMap[cr3fields.PML4EPAField] = cr3fields.PML4EPA
+	fieldsMap[cr3fields.PML5EPAField] = cr3fields.PML5EPA
+	fieldsMap[cr3fields.PCIDField] = cr3fields.PCID
 	cr3_ = &cr3{
-		flagMap: flagMap,
+		fieldsMap: fieldsMap,
 	}
 }
 
@@ -33,16 +33,16 @@ func CR3() *cr3 {
 	return cr3_
 }
 
-func (cr3 *cr3) Set(flag core.IFlag) error {
-	if _, ok := cr3.flagMap[flag.String()]; !ok {
-		return fmt.Errorf("invalid cr3 set operation: unsupported flag of cr3: %s", flag.String())
+func (cr3 *cr3) Set(field core.IField) error {
+	if _, ok := cr3.fieldsMap[field.String()]; !ok {
+		return fmt.Errorf("invalid cr3 set operation: unsupported field of cr3: %s", field.String())
 	}
 
-	if (flag.Value() | cr3.reservedBit) != cr3.reservedBit {
+	if (field.Value() | cr3.reservedBit) != cr3.reservedBit {
 		return fmt.Errorf("invalid cr3 set operation: mustn't set reserved bit")
 	}
 
-	cr3.value |= flag.Value()
+	cr3.value |= field.Value()
 	return nil
 }
 
@@ -54,22 +54,22 @@ func (cr3 *cr3) SetReserveBit(reservedBit uint64) {
 	cr3.reservedBit = reservedBit
 }
 
-func (cr3 *cr3) Clr(flagName string) error {
-	flag, ok := cr3.flagMap[flagName]
+func (cr3 *cr3) Clr(fieldName string) error {
+	field, ok := cr3.fieldsMap[fieldName]
 	if !ok {
-		return fmt.Errorf("invalid cr3 clr operation: unsupported flag of cr3: %s", flagName)
+		return fmt.Errorf("invalid cr3 clr operation: unsupported Field of cr3: %s", fieldName)
 	}
 
-	cr3.value ^= flag.Value()
+	cr3.value ^= field.Value()
 
 	return nil
 }
 
-func (cr3 *cr3) Get(flagName string) (uint64, error) {
-	flag, ok := cr3.flagMap[flagName]
+func (cr3 *cr3) Get(fieldName string) (uint64, error) {
+	field, ok := cr3.fieldsMap[fieldName]
 	if !ok {
-		return 0, fmt.Errorf("invalid cr3 get operation: unsupported flag of cr3: %s", flagName)
+		return 0, fmt.Errorf("invalid cr3 get operation: unsupported Field of cr3: %s", fieldName)
 	}
 
-	return cr3.value & flag.Value() & cr3.maskBit, nil
+	return cr3.value & field.Value() & cr3.maskBit, nil
 }

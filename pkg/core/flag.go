@@ -1,6 +1,6 @@
 package core
 
-type IFlag interface {
+type IField interface {
 	String() string
 	Value() uint64
 }

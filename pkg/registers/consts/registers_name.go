@@ -8,5 +8,5 @@ const (
 	CR2    = "CR2"
 	CR3    = "CR3"
 	CR4    = "CR4"
-	EFLAGS = "eflagsflags"
+	EFLAGS = "eflagsfields"
 )
