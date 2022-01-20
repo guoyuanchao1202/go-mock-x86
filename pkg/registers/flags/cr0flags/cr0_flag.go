@@ -1,4 +1,4 @@
-package cr0
+package cr0flags
 
 import (
 	"go-mock-x86/pkg/core"
@@ -33,9 +33,7 @@ var (
 	PG core.IFlag
 )
 
-var flagMap map[string]core.IFlag
-
-func initFlag() {
+func init() {
 	PE = core2.NewRegisterFlag(PEFlag, 0, 1)
 	MP = core2.NewRegisterFlag(MPFlag, 1, 2)
 	EM = core2.NewRegisterFlag(EMFlag, 2, 3)
@@ -47,17 +45,4 @@ func initFlag() {
 	NW = core2.NewRegisterFlag(NWFlag, 29, 30)
 	CD = core2.NewRegisterFlag(CDFlag, 30, 31)
 	PG = core2.NewRegisterFlag(PGFlag, 31, 32)
-
-	flagMap = make(map[string]core.IFlag)
-	flagMap[PEFlag] = PE
-	flagMap[MPFlag] = MP
-	flagMap[EMFlag] = EM
-	flagMap[TSFlag] = TS
-	flagMap[ETFlag] = ET
-	flagMap[NEFlag] = NE
-	flagMap[WPFlag] = WP
-	flagMap[AMFlag] = AM
-	flagMap[NWFlag] = NW
-	flagMap[CDFlag] = CD
-	flagMap[PGFlag] = PG
 }
