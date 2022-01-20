@@ -15,9 +15,13 @@ func (rm *RegisterManager) processCR2SetOperation(register core.IRegister, flag 
 }
 
 func (rm *RegisterManager) processCR3SetOperation(register core.IRegister, flag core.IFlag) error {
-	panic("")
+	panic("todo")
 }
 
 func (rm *RegisterManager) processCR4SetOperation(register core.IRegister, flag core.IFlag) error {
+	panic("todo")
+}
+
+func (rm *RegisterManager) processEFLAGSSetOperation(register core.IRegister, flag core.IFlag) error {
 	panic("todo")
 }

@@ -9,7 +9,7 @@ type RegisterFlag struct {
 
 func NewRegisterFlag(name string, startOffset, endOffset byte) core.IFlag {
 	res := &RegisterFlag{
-		name:  name,
+		name: name,
 		value: core.GetValue(startOffset, endOffset),
 	}
 	return res

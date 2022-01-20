@@ -35,7 +35,7 @@ func CR3() *cr3 {
 
 func (cr3 *cr3) Set(flag core.IFlag) error {
 	if _, ok := cr3.flagMap[flag.String()]; !ok {
-		return fmt.Errorf("invalid cr0 set operation: unsupported flag of cr3: %s", flag.String())
+		return fmt.Errorf("invalid cr3 set operation: unsupported flag of cr3: %s", flag.String())
 	}
 
 	if (flag.Value() | cr3.reservedBit) != cr3.reservedBit {

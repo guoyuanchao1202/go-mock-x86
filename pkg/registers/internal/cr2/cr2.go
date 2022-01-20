@@ -28,7 +28,7 @@ func CR2() *cr2 {
 
 func (cr2 *cr2) Set(flag core.IFlag) error {
 	if _, ok := cr2.flagMap[flag.String()]; !ok {
-		return fmt.Errorf("invalid cr0 set operation: unsupported flag of cr2: %s", flag.String())
+		return fmt.Errorf("invalid cr2 set operation: unsupported flag of cr2: %s", flag.String())
 	}
 
 	cr2.value |= flag.Value()
